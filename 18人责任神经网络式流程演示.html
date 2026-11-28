@@ -1,0 +1,201 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>AI责任 · 18人神经网络式交互演示</title>
+<style>
+*{box-sizing:border-box}
+html,body{margin:0;padding:0;background:#07101f;color:#fff;font-family:"PingFang SC","Microsoft YaHei","Noto Sans CJK SC",sans-serif}
+body{overflow-x:hidden}
+.scene{height:100vh;min-height:720px;position:relative;overflow:hidden;background:
+radial-gradient(circle at 50% 45%,rgba(40,105,190,.14),transparent 35%),
+linear-gradient(180deg,#07101f 0%,#0b1426 100%)}
+.scene:before{content:"";position:absolute;inset:0;background-image:
+linear-gradient(rgba(255,255,255,.025) 1px,transparent 1px),
+linear-gradient(90deg,rgba(255,255,255,.025) 1px,transparent 1px);
+background-size:40px 40px;pointer-events:none}
+.hud{position:absolute;top:34px;left:50%;transform:translateX(-50%);z-index:5;text-align:center;letter-spacing:2px}
+.hud .eyebrow{font-size:12px;color:#5ee7ff;letter-spacing:5px}
+.hud h1{font-size:27px;margin:10px 0 6px;font-weight:700}
+.hud p{margin:0;color:#8495ad;font-size:13px}
+.progress{position:absolute;right:35px;top:35px;color:#657894;font-size:12px;z-index:5}
+.progress b{color:#5ee7ff;font-size:18px}
+
+.network{position:absolute;inset:130px 5% 80px;display:grid;grid-template-columns:1fr 1.5fr 1fr;align-items:center;gap:60px;z-index:2}
+.layer{position:relative;height:100%;display:flex;align-items:center;justify-content:center}
+.layer-label{position:absolute;top:-26px;font-size:11px;color:#526884;letter-spacing:3px}
+.apps{display:flex;flex-direction:column;gap:34px;width:210px}
+.app{height:105px;border:1px solid rgba(94,231,255,.28);background:rgba(13,31,55,.68);border-radius:16px;padding:16px;position:relative;box-shadow:0 0 30px rgba(28,154,255,.07)}
+.app .tag{font-size:10px;color:#5ee7ff;letter-spacing:2px}
+.app h3{margin:8px 0 0;font-size:16px}
+.app p{margin:5px 0 0;font-size:11px;color:#7588a3}
+.people{display:grid;grid-template-columns:repeat(3,110px);grid-template-rows:repeat(6,70px);gap:17px 34px;justify-content:center}
+.person{position:relative;display:flex;flex-direction:column;align-items:center;justify-content:center;filter:drop-shadow(0 0 8px rgba(68,190,255,.15))}
+.person .head{width:19px;height:19px;border:2px solid #5ee7ff;border-radius:50%;background:#0a2037}
+.person .body{width:37px;height:28px;border:2px solid #5ee7ff;border-radius:16px 16px 9px 9px;border-bottom-color:#397fa5;background:linear-gradient(180deg,#0d304c,#0a182b)}
+.person span{font-size:10px;color:#b8c9df;margin-top:5px;white-space:nowrap}
+.person.pm .head,.person.pm .body{border-color:#ffd166}
+.person.product .head,.person.product .body{border-color:#ff8fab}
+.person.arch .head,.person.arch .body{border-color:#a78bfa}
+.person.dev .head,.person.dev .body{border-color:#4ade80}
+.person.test .head,.person.test .body{border-color:#60a5fa}
+.person.ops .head,.person.ops .body{border-color:#fb923c}
+
+.loss{width:150px;height:150px;border-radius:50%;border:2px solid #ff4d6d;background:radial-gradient(circle,rgba(255,54,95,.25),rgba(80,12,35,.12));display:flex;align-items:center;justify-content:center;flex-direction:column;opacity:0;transform:scale(.55);transition:.65s cubic-bezier(.2,.8,.2,1);box-shadow:0 0 45px rgba(255,55,95,.22)}
+.loss.show{opacity:1;transform:scale(1)}
+.loss strong{font-size:32px;letter-spacing:3px;color:#ff6f88}
+.loss small{font-size:10px;color:#b88391;letter-spacing:2px;margin-top:5px}
+
+.svg-lines{position:absolute;inset:0;width:100%;height:100%;z-index:-1;overflow:visible}
+.connection{stroke:rgba(71,174,230,.23);stroke-width:1.2;fill:none}
+.connection.active{stroke:#5ee7ff;stroke-width:1.7;stroke-dasharray:5 7;animation:flow 1.5s linear infinite}
+@keyframes flow{to{stroke-dashoffset:-24}}
+.question{position:absolute;inset:0;display:flex;align-items:center;justify-content:center;opacity:0;transform:translateY(30px);pointer-events:none;transition:.6s;z-index:10;background:rgba(4,10,20,.38);backdrop-filter:blur(2px)}
+.question.show{opacity:1;transform:none}
+.question .card{width:min(760px,80vw);padding:42px 55px;border:1px solid rgba(255,209,102,.5);background:rgba(10,22,40,.94);border-radius:18px;box-shadow:0 0 70px rgba(255,209,102,.08);text-align:center}
+.question .qtag{color:#ffd166;font-size:11px;letter-spacing:4px}
+.question h2{font-size:30px;line-height:1.5;margin:18px 0 10px}
+.question p{font-size:12px;color:#8fa0b8;margin:0}
+
+.hint{position:absolute;bottom:27px;left:50%;transform:translateX(-50%);color:#526987;font-size:11px;z-index:6;letter-spacing:1px}
+.wheel{display:inline-block;margin-left:8px;color:#5ee7ff}
+
+.info{position:absolute;left:28px;bottom:28px;color:#435773;font-size:10px;z-index:5}
+.info b{color:#617994}
+
+body.presentation .toolbar{display:none}
+@media(max-width:900px){
+ .network{grid-template-columns:1fr;gap:10px;inset:100px 20px 70px}
+ .apps{display:none}.people{transform:scale(.75)}
+ .layer.left,.layer.right{display:none}
+ .hud h1{font-size:21px}
+}
+</style>
+</head>
+<body>
+<section class="scene" id="scene">
+  <div class="hud">
+    <div class="eyebrow">MULTI-APPLICATION · MULTI-ROLE</div>
+    <h1>当一个问题“出了问题”，责任到底属于谁？</h1>
+    <p>把复杂的软件交付责任，像神经网络一样展开</p>
+  </div>
+
+  <div class="progress">SCROLL <b id="step">01</b> / 03</div>
+
+  <div class="network">
+    <div class="layer">
+      <div class="layer-label">APPLICATION LAYER · 3 APPS</div>
+      <div class="apps">
+        <div class="app"><div class="tag">APP 01</div><h3>应用一 · 核心业务</h3><p>需求 / 设计 / 开发 / 运行</p></div>
+        <div class="app"><div class="tag">APP 02</div><h3>应用二 · 客户服务</h3><p>渠道 / 服务 / 数据</p></div>
+        <div class="app"><div class="tag">APP 03</div><h3>应用三 · 数据平台</h3><p>数据 / 模型 / 基础设施</p></div>
+      </div>
+    </div>
+
+    <div class="layer">
+      <div class="layer-label">HIDDEN LAYER · 18 RESPONSIBILITIES</div>
+      <div class="people" id="people"></div>
+    </div>
+
+    <div class="layer">
+      <div class="layer-label">OUTPUT</div>
+      <div class="loss" id="loss"><strong>LOSS</strong><small>责任损失 / 质量损失</small></div>
+    </div>
+
+    <svg class="svg-lines" id="lines"></svg>
+  </div>
+
+  <div class="question" id="question">
+    <div class="card">
+      <div class="qtag">A QUESTION APPEARS</div>
+      <h2>出了生成问题，如何划分责任？</h2>
+      <p>18 个角色、3 个应用、多个协作链路 —— 谁对最终结果负责？</p>
+    </div>
+  </div>
+
+  <div class="hint">向下滚动推进演示 <span class="wheel">↓</span></div>
+  <div class="info">交互状态：<b id="state">责任网络展开</b></div>
+</section>
+
+<script>
+const roles=[
+  ["项目经理","pm"],["产品经理","product"],["架构师","arch"],
+  ["开发经理","dev"],["测试经理","test"],["运维经理","ops"]
+];
+const people=document.getElementById("people");
+for(let app=0;app<3;app++){
+  roles.forEach(([name,cls],r)=>{
+    const el=document.createElement("div");
+    el.className=`person ${cls}`;
+    el.dataset.app=app; el.dataset.role=r;
+    el.innerHTML=`<div class="head"></div><div class="body"></div><span>${name}</span>`;
+    people.appendChild(el);
+  });
+}
+const svg=document.getElementById("lines");
+const network=document.querySelector(".network");
+function center(el){
+  const a=el.getBoundingClientRect(), b=network.getBoundingClientRect();
+  return {x:a.left+a.width/2-b.left,y:a.top+a.height/2-b.top};
+}
+function drawLines(){
+  svg.innerHTML="";
+  const apps=[...document.querySelectorAll(".app")];
+  const ps=[...document.querySelectorAll(".person")];
+  apps.forEach((a,ai)=>{
+    for(let r=0;r<6;r++){
+      const p=ps[ai*6+r], A=center(a), B=center(p);
+      const line=document.createElementNS("http://www.w3.org/2000/svg","path");
+      line.setAttribute("d",`M ${A.x} ${A.y} C ${(A.x+B.x)/2} ${A.y}, ${(A.x+B.x)/2} ${B.y}, ${B.x} ${B.y}`);
+      line.classList.add("connection");
+      svg.appendChild(line);
+    }
+  });
+  ps.forEach(p=>{
+    const A=center(p), loss=center(document.getElementById("loss"));
+    const line=document.createElementNS("http://www.w3.org/2000/svg","path");
+    line.setAttribute("d",`M ${A.x} ${A.y} C ${A.x+100} ${A.y}, ${loss.x-100} ${loss.y}, ${loss.x} ${loss.y}`);
+    line.classList.add("connection");
+    line.dataset.role="loss";
+    svg.appendChild(line);
+  });
+}
+window.addEventListener("resize",drawLines);
+setTimeout(drawLines,80);
+
+let state=0,locked=false;
+const q=document.getElementById("question"), loss=document.getElementById("loss"), step=document.getElementById("step"), status=document.getElementById("state");
+function update(){
+  step.textContent=String(state+1).padStart(2,"0");
+  if(state===0){
+    q.classList.remove("show");loss.classList.remove("show");
+    document.querySelectorAll(".connection").forEach(x=>x.classList.remove("active"));
+    status.textContent="责任网络展开";
+  }else if(state===1){
+    q.classList.add("show");loss.classList.remove("show");
+    status.textContent="问题出现：责任如何划分？";
+  }else{
+    q.classList.remove("show");loss.classList.add("show");
+    document.querySelectorAll('.connection[data-role="loss"]').forEach(x=>x.classList.add("active"));
+    document.querySelectorAll(".person").forEach(x=>x.style.filter="drop-shadow(0 0 12px rgba(255,75,105,.35))");
+    status.textContent="结果节点：LOSS";
+  }
+  drawLines();
+}
+window.addEventListener("wheel",e=>{
+  if(locked)return;
+  locked=true;
+  if(e.deltaY>20 && state<2) state++;
+  else if(e.deltaY<-20 && state>0) state--;
+  update();
+  setTimeout(()=>locked=false,650);
+},{passive:true});
+document.addEventListener("keydown",e=>{
+  if(e.key==="ArrowDown"||e.key==="PageDown"){if(state<2)state++;update()}
+  if(e.key==="ArrowUp"||e.key==="PageUp"){if(state>0)state--;update()}
+});
+update();
+</script>
+</body>
+</html>

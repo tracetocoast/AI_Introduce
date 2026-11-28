@@ -1,55 +1,673 @@
 <!doctype html>
-<html lang="zh-CN"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>AI发展介绍 · 人工智能发展史</title>
+<html lang="zh-CN" class="js">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>总览 · 研发流程 · AI发展史</title>
 <style>
-*{box-sizing:border-box}html{scroll-behavior:smooth}body{margin:0;background:#080a0f;color:#f5f6fa;font-family:-apple-system,BlinkMacSystemFont,"Noto Sans SC",sans-serif;font-weight:300}a{color:inherit;text-decoration:none}.bar{position:fixed;z-index:9;top:0;width:100%;padding:18px 6vw;display:flex;justify-content:space-between;background:#080a0fcc;backdrop-filter:blur(18px);border-bottom:1px solid #ffffff12;font-size:12px}.bar nav{display:flex;gap:28px;color:#aaa}.progress{position:fixed;z-index:10;top:56px;height:2px;width:0;background:linear-gradient(90deg,#80b5ff,#cf9dff)}.tag{font:10px monospace;letter-spacing:.18em;color:#92baff}.hero{height:100vh;min-height:650px;display:grid;place-items:center;text-align:center;position:relative;overflow:hidden;background:radial-gradient(ellipse,#20375666,transparent 52%)}.hero h1{font-size:clamp(68px,12vw,150px);letter-spacing:-.08em;font-weight:500;margin:22px 0;background:linear-gradient(white,#9ca9bf);color:transparent;background-clip:text}.hero p{font-size:20px;line-height:1.8;color:#b9bdc7}.orb{position:absolute;width:min(70vw,750px);aspect-ratio:1;border:1px solid #ffffff10;border-radius:50%;box-shadow:inset 0 0 90px #83adff12,0 0 100px #83adff0b;animation:spin 30s linear infinite}.orb:before,.orb:after{content:"";position:absolute;inset:12%;border:1px solid #c4d8ff17;border-radius:50%;transform:rotateX(65deg)}.orb:after{inset:22%;transform:rotateX(68deg) rotateZ(45deg)}@keyframes spin{to{transform:rotate(360deg)}}.scroll{position:absolute;bottom:30px;color:#858894;font:10px monospace;letter-spacing:.15em}.scroll:after{content:"";display:block;width:1px;height:38px;margin:12px auto;background:linear-gradient(white,transparent);animation:drop 1.5s infinite}@keyframes drop{50%{transform:scaleY(.5);transform-origin:top}}
-section{padding:130px 9vw}.intro{min-height:80vh;display:grid;grid-template-columns:1fr 1fr;gap:10vw;align-items:center}.intro h2,.head h2{font-size:clamp(42px,7vw,82px);font-weight:400;line-height:1.08;letter-spacing:-.06em}.intro p,.head p{color:#a5a8b2;line-height:2;max-width:520px}.card{padding:34px;border:1px solid #ffffff20;border-radius:22px;background:linear-gradient(140deg,#ffffff10,#ffffff02)}.card b{font-size:45px;font-weight:300}.timeline{background:#0c0f16}.head{text-align:center;max-width:780px;margin:0 auto 70px}.head h2{margin:18px 0}.years{max-width:none;width:100%;margin:auto;display:flex;justify-content:flex-start;gap:34px;position:relative;overflow-x:auto;overflow-y:hidden;padding:0 max(8px,calc(50% - 75px)) 22px;scroll-snap-type:x proximity;scroll-padding-inline:calc(50% - 75px);scrollbar-width:thin;scrollbar-color:#60769a #ffffff0c}.years:before{display:none}.year{position:relative;z-index:1;flex:0 0 150px;width:150px;scroll-snap-align:center;text-align:center;border:0;background:none;color:#eee;text-align:left;cursor:pointer;padding:0}.year i{display:block;width:13px;height:13px;border-radius:50%;background:#383f4d;border:1px solid #9ca4b3;margin:0 auto 22px;transition:.3s}.year:not(:last-child):after{content:"";position:absolute;z-index:-1;left:calc(50% + 7px);top:6px;width:170px;height:1px;background:#ffffff30;pointer-events:none}.year.active i,.year:hover i{background:#9dc3ff;box-shadow:0 0 0 7px #8bb9ff20,0 0 18px #8bb9ff}.year small{font:11px monospace;color:#9298a5}.year strong{display:block;font-weight:400;margin:9px 0}.year span{font-size:12px;color:#9297a2;line-height:1.75;display:block;max-width:145px;margin:0 auto}.timeline-hint{max-width:1100px;margin:8px auto 0;text-align:right;color:#7f8795;font:10px monospace;letter-spacing:.08em}.detail{max-width:1040px;margin:60px auto 0;padding:34px;border:1px solid #ffffff20;border-radius:18px;background:#141923;display:grid;grid-template-columns:1fr 1fr;gap:24px;transition:.3s}.detail h3{font-size:27px;font-weight:400;margin:12px 0}.detail p{font-size:14px;color:#a5a8b2;line-height:1.8}.detail aside{border-left:1px solid #91b9ff66;padding:15px 22px;color:#a8c7ff;line-height:2}.detail aside b{display:block;color:white;font:13px monospace;opacity:.58;font-weight:400}.history-art{width:100%;height:230px;border:1px solid #ffffff18;border-radius:14px;background:radial-gradient(ellipse at 50% 80%,#38517c55,transparent 65%),linear-gradient(145deg,#202b3d,#111722);overflow:hidden}.history-art svg{width:100%;height:100%}.history-art .art-glow{filter:drop-shadow(0 0 10px #9bc1ff99)}
-.learning{height:270vh;padding:0}.sticky{position:sticky;top:0;height:100vh;min-height:650px;padding:8vh 9vw;display:grid;grid-template-columns:1fr 1fr;align-items:center;gap:5vw;overflow:hidden}.copy h2{font-size:clamp(44px,6vw,78px);font-weight:400;line-height:1.1;letter-spacing:-.06em}.copy p{color:#aaaeb9;line-height:1.9;max-width:460px}.example{font-size:13px;color:#9da7b9!important;margin:0 0 20px}.formula{font:13px monospace;color:#b4cefa;border-left:2px solid #8bb9ff;padding:12px;margin:22px 0;background:#ffffff08}.controls button{border:1px solid #ffffff30;border-radius:99px;background:#ffffff09;color:#aaa;padding:10px 14px;cursor:pointer}.controls button.active{background:#b8d2ff;color:#10141b}.network{position:relative;width:min(45vw,570px);height:55vh}.network svg{width:100%;height:100%;overflow:visible}.edge{stroke:#7189b1;stroke-opacity:.35}.node{fill:#172131;stroke:#98b8eb;stroke-width:2}.node.hot{fill:#b5d1ff;filter:drop-shadow(0 0 10px #8bb9ff)}.node.flash{animation:nodeFlash .65s ease-in-out}@keyframes nodeFlash{0%,100%{fill:#172131;filter:none}45%{fill:#d3e3ff;filter:drop-shadow(0 0 16px #8bb9ff)}}.label{position:absolute;font:10px monospace;color:#929db1}.principles{background:#10131a}.grid{display:grid;grid-template-columns:repeat(3,1fr);gap:16px}.tile{border:1px solid #ffffff1c;border-radius:20px;padding:28px;min-height:350px;background:linear-gradient(145deg,#ffffff0b,#ffffff02);transition:.4s}.tile:hover{transform:translateY(-8px);border-color:#8bb9ff66}.tile{cursor:pointer}.more{display:inline-block;margin-top:12px;color:#9fc3ff;font-size:12px}.modal{position:fixed;inset:0;z-index:30;background:#03050bd9;backdrop-filter:blur(14px);display:grid;place-items:center;padding:22px;opacity:0;pointer-events:none;transition:.25s}.modal.open{opacity:1;pointer-events:auto}.modal-box{width:min(650px,100%);padding:38px;border:1px solid #ffffff25;border-radius:22px;background:linear-gradient(145deg,#1a2231,#0c1018);transform:translateY(16px);transition:.3s}.modal.open .modal-box{transform:none}.modal h3{font-size:32px;font-weight:400;margin:10px 0}.modal p,.modal li{color:#b0b4bf;line-height:1.9;font-size:14px}.modal ul{padding-left:20px}.modal-close{float:right;background:#ffffff12;border:1px solid #ffffff22;color:#ddd;border-radius:99px;padding:8px 13px;cursor:pointer}.tile small{font:11px monospace;color:#91b9ff}.tile h3{font-size:23px;font-weight:400}.tile p{font-size:13px;color:#a5a8b2;line-height:1.9}.viz{height:130px;display:grid;place-items:center;color:#8bb9ff;font-size:60px}.ring{width:90px;height:90px;border:1px solid #8bb9ff;border-radius:50%;box-shadow:inset 0 0 25px #8bb9ff33,0 0 35px #8bb9ff33;animation:spin 8s linear infinite}.future{text-align:center;min-height:80vh;display:grid;place-items:center;background:radial-gradient(ellipse at bottom,#273a5b80,transparent 58%)}.future h2{font-size:clamp(54px,9vw,112px);font-weight:400;letter-spacing:-.07em;line-height:1.05}.future p{max-width:650px;color:#a5a8b2;line-height:2}.chips button{display:inline-block;cursor:pointer;background:#ffffff08;border:1px solid #ffffff25;border-radius:99px;padding:10px 15px;margin:8px;color:#b7c2d5;font:11px monospace}footer{padding:24px 6vw;border-top:1px solid #ffffff16;color:#777;font:10px monospace;display:flex;justify-content:space-between}.reveal{opacity:1;transform:none;transition:opacity .9s,transform .9s}.reveal.in{opacity:1;transform:none}@media(max-width:720px){.bar{padding:16px 5vw}.bar nav{gap:12px}.intro{grid-template-columns:1fr;padding:110px 8vw}.years{overflow-x:auto;gap:24px}.years{padding-left:max(8px,calc(50% - 75px));padding-right:max(8px,calc(50% - 75px))}.year{flex:0 0 150px;width:150px;min-width:150px}.timeline-hint{text-align:center}.detail{grid-template-columns:1fr;padding:24px}.detail aside{border-left:0;border-top:1px solid #91b9ff66;padding:14px 0}.sticky{grid-template-columns:1fr;padding:82px 8vw 8px;align-content:start;gap:0;min-height:0}.copy h2{margin:10px 0}.copy p{margin:8px 0}.formula{margin:12px 0;padding:9px}.example{margin-bottom:12px!important}.controls button{padding:8px 10px;font-size:11px}.copy h2{font-size:44px;margin:12px 0}.copy p{font-size:13px}.network{width:85vw;height:30vh;margin:auto}.grid{grid-template-columns:1fr}.tile{min-height:310px}.hero p{font-size:16px}}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{margin:0;background:#080a0f;color:#f7f8fb;font-family:-apple-system,BlinkMacSystemFont,"Noto Sans SC",sans-serif;font-size:18px;font-weight:400;-webkit-font-smoothing:antialiased}
+.js .reveal{opacity:0;transform:translateY(28px)}
+.reveal{transition:opacity .9s,transform .9s}
+.js .reveal.in{opacity:1;transform:none}
+a{color:inherit;text-decoration:none}
+button{font:inherit;color:inherit;cursor:pointer}
+.bar{position:fixed;z-index:9;top:0;width:100%;padding:18px 6vw;display:flex;justify-content:space-between;align-items:center;gap:18px;background:#080a0fcc;backdrop-filter:blur(18px);border-bottom:1px solid #ffffff12;font-size:18px}
+.bar nav{display:flex;gap:28px;color:#e8eaef}
+.bar nav a{transition:.4s}
+.bar nav a:hover{color:#fff;text-shadow:0 0 16px #8bb9ff}
+.progress{position:fixed;z-index:10;top:64px;height:2px;width:0;background:linear-gradient(90deg,#80b5ff,#cf9dff)}
+.tag{font:14px ui-monospace,SFMono-Regular,Menlo,monospace;letter-spacing:.14em;color:#c5dcff}
+section{padding:96px 9vw}
+section:first-of-type{padding-top:120px}
+.head{text-align:center;max-width:860px;margin:0 auto 36px}
+.head h2{font-size:clamp(36px,3.4vw,48px);font-weight:500;line-height:1.25;letter-spacing:-.04em;margin:12px 0}
+.head p{color:#e7e9ef;font-size:20px;line-height:1.85;margin:0 auto;max-width:720px}
+.cloud{position:relative;height:430px;margin:8px auto 28px;max-width:980px}
+.cloud .drop{position:absolute;max-width:64%;animation:cloud-drop 1.7s linear both}
+.cloud .q{display:inline-block;font-weight:500;line-height:1.35;letter-spacing:-.03em;transition:transform .4s}
+.cloud .p1{left:0;top:0;max-width:100%;animation-delay:0s}
+.cloud .p2{right:0;top:112px;max-width:42%;text-align:right;animation-delay:.08s}
+.cloud .p3{left:0;top:108px;max-width:55%;animation-delay:.14s}
+.cloud .p4{right:0;top:214px;max-width:44%;text-align:right;animation-delay:.04s}
+.cloud .p5{left:0;top:210px;max-width:52%;animation-delay:.18s}
+.cloud .p6{right:0;top:318px;max-width:50%;text-align:right;animation-delay:.1s}
+.cloud .c1{font-size:clamp(28px,3vw,40px);color:#fff;transform:rotate(-2deg);text-shadow:0 0 18px #9dc3ff88}
+.cloud .c2{font-size:clamp(24px,2.6vw,32px);color:#ffd56a;transform:rotate(2.5deg);text-shadow:0 0 16px #ffd56a66}
+.cloud .c3{font-size:clamp(22px,2.3vw,30px);color:#7dffe1;transform:rotate(-1.5deg);text-shadow:0 0 16px #7dffe155}
+.cloud .c4{font-size:clamp(24px,2.5vw,32px);color:#ff9ec8;transform:rotate(2deg);text-shadow:0 0 16px #ff9ec866}
+.cloud .c5{font-size:clamp(22px,2.3vw,28px);color:#d2b6ff;transform:rotate(1deg);text-shadow:0 0 16px #d2b6ff66}
+.cloud .c6{font-size:clamp(22px,2.4vw,30px);color:#8ec5ff;transform:rotate(-2deg);text-shadow:0 0 16px #8ec5ff66}
+.cloud .c1:hover{transform:rotate(-3deg) translateY(-8px)}
+.cloud .c2:hover{transform:rotate(3deg) translateY(-8px)}
+.cloud .c3:hover{transform:rotate(-2deg) translateY(-8px)}
+.cloud .c4:hover{transform:rotate(3deg) translateY(-8px)}
+.cloud .c5:hover{transform:rotate(2deg) translateY(-8px)}
+.cloud .c6:hover{transform:rotate(-3deg) translateY(-8px)}
+@keyframes cloud-drop{
+  0%{transform:translateY(-78vh)}
+  54%{transform:translateY(0)}
+  66%{transform:translateY(-42px)}
+  76%{transform:translateY(0)}
+  84%{transform:translateY(-18px)}
+  91%{transform:translateY(0)}
+  96%{transform:translateY(-7px)}
+  100%{transform:translateY(0)}
+}
+.topics{display:grid;grid-template-columns:repeat(2,1fr);gap:12px;max-width:640px;margin:0 auto}
+.topics a{display:block;border:1px solid #ffffff1c;border-radius:16px;padding:18px 16px;background:linear-gradient(160deg,#ffffff0c,#ffffff03);min-height:92px;transition:.4s}
+.topics a:hover{border-color:#f4f8ff;transform:translateY(-8px);box-shadow:0 0 0 1px #fff,0 0 0 4px #c5dcff,0 0 14px #eaf4ff}
+.topics small{display:block;margin-bottom:8px}
+.topics b{display:block;font-size:22px;font-weight:500;letter-spacing:-.02em;line-height:1.45}
+.arch{margin:0 auto;max-width:1080px;border:1px solid #ffffff20;border-radius:22px;background:linear-gradient(180deg,#ffffff0c,#ffffff03);padding:22px 22px 18px}
+.arch ol{list-style:none;margin:0;padding:0}
+.layer{display:grid;grid-template-columns:240px 1fr;gap:18px;align-items:stretch;position:relative}
+.layer+.layer{margin-top:28px}
+.layer+.layer:before{content:"";position:absolute;left:112px;top:-22px;width:1px;height:16px;background:linear-gradient(#80b5ff,#cf9dff)}
+.layer+.layer:after{content:"";position:absolute;left:108px;top:-8px;border:4px solid transparent;border-top-color:#b7d0ff}
+.arch-name{border-radius:16px;padding:16px;background:#141923;border:1px solid #ffffff16;display:flex;flex-direction:column;justify-content:center}
+.arch-name small{font:15px ui-monospace,SFMono-Regular,Menlo,monospace;color:#c5dcff;letter-spacing:.12em}
+.arch-name strong{display:block;margin-top:8px;font-size:22px;font-weight:500;letter-spacing:-.03em;line-height:1.35}
+.arch-body{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+.arch-body.quad{grid-template-columns:repeat(4,1fr)}
+.arch-body article{border:1px solid #ffffff16;border-radius:16px;padding:16px 16px 14px;background:#ffffff06;transition:.4s}
+.arch-body article:hover{transform:translateY(-8px);border-color:#f4f8ff;box-shadow:0 0 0 1px #fff,0 0 0 4px #c5dcff,0 0 14px #eaf4ff}
+.arch-body b{display:block;font-weight:500;font-size:20px;letter-spacing:-.02em;margin-bottom:8px}
+.arch-body span{display:block;color:#e7e9ef;font-size:17px;line-height:1.7}
+.arch-body article.name-only{display:flex;align-items:center}
+.arch-note{margin:16px 4px 0;text-align:right;color:#d0d6e2;font:14px ui-monospace,SFMono-Regular,Menlo,monospace;letter-spacing:.1em}
+.sas{margin:28px auto 0;max-width:1080px;display:flex;justify-content:center;align-items:center;gap:18px;flex-wrap:wrap}
+.term{position:relative;border:1px solid #ffffff24;background:#141923;color:#f7f8fb;border-radius:999px;padding:14px 32px;font-size:26px;font-weight:500;letter-spacing:-.03em;transition:.4s}
+.term.plain{cursor:default}
+.term:not(.plain):hover,.term:not(.plain):focus-visible{transform:translateY(-8px);border-color:#f4f8ff;box-shadow:0 0 0 1px #fff,0 0 0 4px #c5dcff,0 0 14px #eaf4ff}
+.term .tip{position:absolute;left:50%;top:calc(100% + 12px);transform:translateX(-50%) translateY(12px);width:min(640px,74vw);padding:16px 18px;border-radius:14px;background:#101722f5;border:1px solid #9dc3ffaa;box-shadow:0 16px 40px #000c;color:#f7f8fb;font-size:18px;font-weight:400;line-height:1.7;letter-spacing:0;text-align:left;opacity:0;visibility:hidden;z-index:3;transition:.3s}
+.term:hover .tip,.term:focus-visible .tip{opacity:1;visibility:visible;transform:translateX(-50%) translateY(0)}
+.sas i{font-style:normal;color:#c5dcff;font-size:28px}
+.bases{max-width:1080px;margin:72px auto 0;border:1px solid #ffffff20;border-radius:22px;background:linear-gradient(180deg,#ffffff0c,#ffffff03);padding:28px 28px 18px}
+.bases h3{margin:8px 0 8px;font-size:32px;font-weight:500;letter-spacing:-.03em}
+.bases .lead{margin:0 0 8px;color:#e8eaef;font-size:20px;line-height:1.7}
+.basemap{width:100%;height:auto;display:block}
+.basemap .land{fill:#162033;stroke:#9dc3ff;stroke-width:2;stroke-linejoin:round;stroke-linecap:round}
+.basemap .leader{stroke:#8bb9ff;stroke-width:1.4;opacity:.8}
+.basemap .mark{fill:#080a0f;stroke:#d5e4ff;stroke-width:3}
+.basemap .city{fill:#fff;font-size:28px;font-weight:500;font-family:-apple-system,BlinkMacSystemFont,"Noto Sans SC",sans-serif}
+.basemap .role{fill:#d6e8ff;font-size:22px;font-family:-apple-system,BlinkMacSystemFont,"Noto Sans SC",sans-serif}
+.basemap .site{cursor:default}
+.basemap .site:hover .mark{fill:#d5e4ff;filter:drop-shadow(0 0 8px #eaf4ff)}
+.basemap .site:hover .city{fill:#fff}
+.basemap .site:hover .leader{stroke:#fff;opacity:1}
+.roles{position:relative;z-index:2;max-width:1080px;margin:72px auto 0;border:1px solid #ffffff20;border-radius:22px;background:linear-gradient(180deg,#ffffff0c,#ffffff03);padding:28px 28px 22px}
+.roles h3{margin:8px 0 8px;font-size:32px;font-weight:500;letter-spacing:-.03em}
+.roles .lead{margin:0 0 8px;color:#e8eaef;font-size:20px;line-height:1.7}
+.role-row{display:grid;grid-template-columns:repeat(6,1fr);gap:12px;margin-top:18px}
+.role-row[hidden]{display:none}
+.who{position:relative;display:flex;flex-direction:column;align-items:center;gap:8px;width:100%;min-width:0;border:1px solid #ffffff16;border-radius:18px;background:#141923;padding:16px 8px 14px;color:var(--ink);transition:.4s}
+.who:hover,.who:focus-visible{transform:translateY(-8px);border-color:#f4f8ff;box-shadow:0 0 0 1px #fff,0 0 0 4px #c5dcff,0 0 14px #eaf4ff;z-index:4}
+.who .fig{width:78px;height:98px;display:block;overflow:visible}
+.who b{font-size:20px;font-weight:500;letter-spacing:-.02em;color:#f7f8fb}
+.who .tip{position:absolute;left:50%;top:calc(100% + 10px);transform:translateX(-50%) translateY(8px);width:min(280px,70vw);padding:14px 16px;border-radius:14px;background:#101722f5;border:1px solid #9dc3ffaa;box-shadow:0 16px 40px #000c;color:#f7f8fb;font-size:17px;font-weight:400;line-height:1.65;text-align:left;opacity:0;visibility:hidden;z-index:5;transition:.3s}
+.who:hover .tip,.who:focus-visible .tip{opacity:1;visibility:visible;transform:translateX(-50%) translateY(0)}
+.who:nth-child(1) .tip{left:0;transform:translateY(8px)}
+.who:nth-child(1):hover .tip,.who:nth-child(1):focus-visible .tip{transform:translateY(0)}
+.who:nth-child(6) .tip{left:auto;right:0;transform:translateY(8px)}
+.who:nth-child(6):hover .tip,.who:nth-child(6):focus-visible .tip{transform:translateY(0)}
+.who.pm{--ink:#ffd166}.who.product{--ink:#ff8fab}.who.architect{--ink:#c4b5fd}
+.who.dev{--ink:#4ade80}.who.test{--ink:#7dd3fc}.who.ops{--ink:#fdba74}
+.flow-block{max-width:980px;margin:0 auto 22px;border:1px solid #ffffff1c;border-radius:20px;padding:22px 24px 20px;background:linear-gradient(165deg,#ffffff0b,#ffffff03)}
+.flow-block h3{margin:8px 0 10px;font-size:28px;font-weight:500;letter-spacing:-.03em}
+.flow-block p{margin:0;color:#e8eaef;font-size:20px;line-height:1.85}
+.cases{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;margin-top:16px}
+.cases article{border:1px solid #ffffff16;border-radius:16px;padding:16px;background:#141923;transition:.4s}
+.cases article:hover{transform:translateY(-8px);border-color:#f4f8ff;box-shadow:0 0 0 1px #fff,0 0 0 4px #c5dcff,0 0 14px #eaf4ff}
+.cases b{display:block;font-size:22px;font-weight:500;margin-bottom:6px}
+.cases span{color:#e7e9ef;font-size:17px;line-height:1.65}
+.net-block{max-width:1180px}
+.net-block h3{font-size:30px}
+.net{position:relative;display:grid;grid-template-columns:220px 1fr 168px;gap:28px;align-items:center;margin-top:22px;min-height:520px}
+.net-apps{display:flex;flex-direction:column;gap:16px}
+.net-app{border:1px solid #9dc3ff44;border-radius:16px;background:#141923cc;padding:14px 16px}
+.net-app small{display:block;font:13px ui-monospace,SFMono-Regular,Menlo,monospace;letter-spacing:.12em;color:#c5dcff}
+.net-app b{display:block;margin-top:6px;font-size:20px;font-weight:500}
+.net-app span{display:block;margin-top:4px;color:#d5deee;font-size:15px}
+.net-people{display:grid;grid-template-columns:repeat(3,1fr);grid-template-rows:repeat(6,auto);grid-auto-flow:column;gap:8px 10px;position:relative;z-index:1}
+.mini{display:flex;flex-direction:column;align-items:center;gap:2px;width:100%;min-width:0;border:0;background:transparent;border-radius:12px;padding:2px 0;color:var(--ink);transition:.3s}
+.mini .fig{width:46px;height:58px;display:block;overflow:visible}
+.mini span{font-size:14px;color:#e8eef8;white-space:nowrap}
+.mini:hover,.mini:focus-visible{transform:translateY(-6px);background:#ffffff12}
+.mini.pm{--ink:#ffd166}.mini.product{--ink:#ff8fab}.mini.architect{--ink:#c4b5fd}
+.mini.dev{--ink:#4ade80}.mini.test{--ink:#7dd3fc}.mini.ops{--ink:#fdba74}
+.loss{width:150px;height:150px;margin:0 auto;border-radius:50%;border:2px solid #ff8fab;background:radial-gradient(circle,#ff4d6d33,#140810);display:flex;flex-direction:column;align-items:center;justify-content:center;box-shadow:0 0 36px #ff4d6d33;position:relative;z-index:1}
+.loss strong{font-size:28px;letter-spacing:.12em;color:#ffb3c7;font-weight:500}
+.loss small{margin-top:6px;color:#f0c6d2;font-size:13px;letter-spacing:.04em}
+.net-lines{position:absolute;inset:0;width:100%;height:100%;z-index:0;pointer-events:none;overflow:visible}
+.net-lines path{fill:none;stroke:#9dc3ff66;stroke-width:1.3}
+.net-lines path.hot{stroke:#eaf4ff;stroke-width:1.8;stroke-dasharray:5 7;animation:net-flow 1.4s linear infinite}
+@keyframes net-flow{to{stroke-dashoffset:-24}}
+.net-duty{margin:18px 0 0;color:#f7f8fb;font-size:20px;line-height:1.7}
+.formula{display:flex;flex-wrap:wrap;justify-content:center;gap:10px;margin:0 auto 22px;max-width:860px}
+.formula span{border:1px solid #ffffff20;border-radius:999px;padding:10px 16px;color:#e7f0ff;font-size:18px;background:#ffffff08;transition:.4s}
+.formula span:hover{transform:translateY(-8px);border-color:#f4f8ff;box-shadow:0 0 0 1px #fff,0 0 0 4px #c5dcff,0 0 14px #eaf4ff}
+.chart{margin:0 auto;max-width:980px;border:1px solid #ffffff1c;border-radius:22px;padding:12px 12px 4px;background:radial-gradient(ellipse at 80% 20%,#38517c33,transparent 55%),linear-gradient(180deg,#ffffff08,#ffffff02)}
+.chart svg{width:100%;height:auto;display:block}
+.axis{stroke:#d5deee;stroke-width:1.6;fill:#d5deee}
+.curve{fill:none;stroke:#d5e4ff;stroke-width:2.4;stroke-linecap:round}
+.chart text{fill:#eef3fb;font-family:-apple-system,BlinkMacSystemFont,"Noto Sans SC",sans-serif;font-size:18px}
+.chart .dim{fill:#d5deee;font-size:16px}
+.dot{fill:#172131;stroke:#d5e4ff;stroke-width:2}
+.ai-go{display:flex;justify-content:center;margin-top:22px}
+.ai-go a{border:1px solid #ffffff30;border-radius:999px;padding:12px 20px;color:#e7f0ff;font-size:18px;transition:.4s}
+.ai-go a:hover{transform:translateY(-8px);border-color:#f4f8ff;box-shadow:0 0 0 1px #fff,0 0 0 4px #c5dcff,0 0 14px #eaf4ff}
+.learn{max-width:1080px;margin:48px auto 0}
+.learn.wide{max-width:1180px}
+.lift{border:1px solid #ffffff16;border-radius:16px;padding:16px;background:#141923;transition:.4s}
+.lift:hover{transform:translateY(-8px);border-color:#f4f8ff;box-shadow:0 0 0 1px #fff,0 0 0 4px #c5dcff,0 0 14px #eaf4ff}
+.quad{display:grid;grid-template-columns:repeat(4,1fr);gap:12px;margin-top:16px}
+.quad b,.steps b,.gloss b,.reason b,.scales b,.issues b,.name-parts b{display:block;font-weight:500;letter-spacing:-.02em}
+.quad b{font-size:20px;margin-bottom:6px}
+.quad span,.steps span,.gloss span,.reason span,.scales li,.issues span,.name-parts span,.moe{color:#e7e9ef;font-size:17px;line-height:1.65}
+.algo-scroll{overflow-x:auto;margin-top:14px}
+.algo{width:100%;min-width:760px;border-collapse:collapse}
+.algo th,.algo td{border-bottom:1px solid #ffffff16;padding:12px 12px;text-align:left;vertical-align:top;line-height:1.6}
+.algo th{color:#c5dcff;font-size:16px;font-weight:500}
+.algo td{color:#e8eef8;font-size:17px}
+.algo td:first-child{color:#fff;font-weight:500;white-space:nowrap}
+.steps,.reason,.gloss,.name-parts,.scales,.issues{display:grid;gap:12px;margin-top:16px}
+.steps{grid-template-columns:repeat(4,1fr)}
+.reason{grid-template-columns:repeat(5,1fr)}
+.gloss{grid-template-columns:repeat(3,1fr)}
+.name-parts,.issues{grid-template-columns:repeat(4,1fr)}
+.scales{grid-template-columns:repeat(3,1fr)}
+.steps small,.name-parts small{display:block;margin-bottom:8px;color:#c5dcff;font:14px ui-monospace,SFMono-Regular,Menlo,monospace;letter-spacing:.08em}
+.steps b,.reason b,.issues b{font-size:20px;margin-bottom:6px}
+.gloss b{font-size:18px;margin-bottom:6px}
+.name-parts b{font-size:26px}
+.scales b{font-size:28px;margin-bottom:8px}
+.scales ul{margin:0;padding-left:18px}
+.scales li+li{margin-top:4px}
+.moe{margin-top:12px;border:1px solid #ffffff16;border-radius:16px;padding:14px 16px;background:#141923}
+.flow-block .note{margin:14px 0 0;color:#e8eaef;font-size:18px;line-height:1.75}
+.flow-block .moe{margin-top:12px}
+.issues svg{width:34px;height:34px;stroke:#c5dcff;fill:none;stroke-width:1.7;stroke-linecap:round;stroke-linejoin:round}
+.issues b{margin-top:10px}
+.intent-line{max-width:980px;margin:-8px auto 28px;text-align:center;font-size:clamp(22px,2.4vw,28px);font-weight:500;letter-spacing:-.03em;line-height:1.5}
+.scheme h3.subhead{margin-top:18px}
+.schemes{display:grid;gap:28px;max-width:1180px;margin:0 auto}
+.scheme{border:1px solid #ffffff1c;border-radius:22px;padding:20px 22px 18px;background:linear-gradient(180deg,#ffffff08,#ffffff02)}
+.scheme h3{margin:0 0 14px;font-size:26px;font-weight:500;letter-spacing:-.02em}
+.intent-fig{margin:0;background:#f4f7fb;border-radius:14px;overflow:hidden}
+.intent-fig img{display:block;width:100%;height:auto}
+.phone-pair{display:flex;justify-content:center;gap:18px;margin:0 0 16px}
+.phone-pair figure{margin:0;width:min(340px,46%);border-radius:22px;overflow:hidden;background:#eef2f8}
+.phone-pair img{display:block;width:100%;height:auto}
+footer{padding:24px 6vw;border-top:1px solid #ffffff16;color:#d0d6e2;font:15px ui-monospace,SFMono-Regular,Menlo,monospace;display:flex;justify-content:space-between;gap:12px}
+@media(max-width:980px){
+  .bar nav{gap:16px;font-size:16px}
+  section,section:first-of-type{padding:84px 6vw}
+  section:first-of-type{padding-top:96px}
+  .topics,.cases,.arch-body.quad,.quad,.steps,.gloss,.name-parts,.scales,.issues,.reason{grid-template-columns:1fr 1fr}
+  .role-row{grid-template-columns:repeat(3,1fr)}
+  .net{grid-template-columns:1fr;min-height:0}
+  .loss{margin-top:8px}
+  .layer{grid-template-columns:1fr}
+  .layer+.layer:before,.layer+.layer:after{left:24px}
+}
+@media(max-width:680px){
+  .bar{flex-wrap:wrap}
+  .bar nav{flex-wrap:wrap;gap:12px 16px}
+  .topics,.cases,.arch-body,.arch-body.quad,.role-row{grid-template-columns:1fr 1fr}
+  .quad,.steps,.gloss,.name-parts,.scales,.issues,.reason{grid-template-columns:1fr}
+  .net-people{grid-auto-flow:row;grid-template-rows:none}
+  .cloud{height:auto;display:flex;flex-direction:column;gap:16px;align-items:flex-start}
+  .cloud .drop,.cloud .drop:hover{position:static;max-width:none;animation:none;text-align:left}
+  .cloud .q,.cloud .q:hover{transform:none}
+  .term .tip{width:min(320px,80vw);font-size:17px}
+}
+@media(prefers-reduced-motion:reduce){
+  *{scroll-behavior:auto!important}
+  .js .reveal,.js .reveal.in{opacity:1;transform:none;transition:none}
+  .topics a,.arch-body article,.cases article,.formula span,.ai-go a,.term,.cloud .q,.bar nav a,.who,.mini,.lift{transition:none}
+  .net-lines path.hot{animation:none}
+  .cloud .drop{animation:none;transform:none}
+}
+</style>
+</head>
+<body>
+<svg class="sprite" aria-hidden="true" width="0" height="0" style="position:absolute">
+  <symbol id="fig-pm" viewBox="0 0 80 100">
+    <path d="M30 20c1-8 6-12 12-12 5 0 9 3 11 8" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"/>
+    <circle cx="38" cy="30" r="11" fill="#10151e" stroke="currentColor" stroke-width="2.2"/>
+    <path d="M20 58c2-14 8-20 18-20s16 6 18 20v18c0 7-6 12-14 12H34c-8 0-14-5-14-12z" fill="#10151e" stroke="currentColor" stroke-width="2.2"/>
+    <path d="M34 44h8l-4 14z" fill="currentColor"/>
+    <rect x="56" y="46" width="16" height="22" rx="2" fill="#10151e" stroke="currentColor" stroke-width="2"/>
+    <path d="M60 46v-3.5h8V46" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+    <path d="M59 53h10M59 58h10M59 63h6" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/>
+  </symbol>
+  <symbol id="fig-product" viewBox="0 0 80 100">
+    <path d="M20 38c1 12 8 18 18 18s17-6 18-18" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"/>
+    <circle cx="38" cy="28" r="11" fill="#10151e" stroke="currentColor" stroke-width="2.2"/>
+    <circle cx="33" cy="29" r="3.3" fill="none" stroke="currentColor" stroke-width="1.6"/>
+    <circle cx="43" cy="29" r="3.3" fill="none" stroke="currentColor" stroke-width="1.6"/>
+    <path d="M36.3 29h4.4" stroke="currentColor" stroke-width="1.4"/>
+    <path d="M26 56c1-11 6-16 12-16s11 5 12 16v14c0 8-4 12-12 12s-12-4-12-12z" fill="#10151e" stroke="currentColor" stroke-width="2.2"/>
+    <path d="M56 14c9 0 16 6 16 13s-7 12-16 12c-4 0-7-1-9-4 2-2 4-6 5-9 1-4 2-8 4-12z" fill="#10151e" stroke="currentColor" stroke-width="2"/>
+    <path d="M64 22l1.5 3.2 3.4.3-2.6 2.2.8 3.3-3.1-1.8-3.1 1.8.8-3.3-2.6-2.2 3.4-.3z" fill="currentColor"/>
+  </symbol>
+  <symbol id="fig-arch" viewBox="0 0 80 100">
+    <path d="M26 18h24" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"/>
+    <path d="M28 18c1 7 4 12 12 12s11-5 12-12" fill="#10151e" stroke="currentColor" stroke-width="2.2"/>
+    <circle cx="40" cy="32" r="11" fill="#10151e" stroke="currentColor" stroke-width="2.2"/>
+    <rect x="31" y="29" width="7" height="5.5" fill="none" stroke="currentColor" stroke-width="1.5"/>
+    <rect x="42" y="29" width="7" height="5.5" fill="none" stroke="currentColor" stroke-width="1.5"/>
+    <path d="M38 31.6h4" stroke="currentColor" stroke-width="1.3"/>
+    <path d="M22 52h28v28H22z" fill="#10151e" stroke="currentColor" stroke-width="2.2"/>
+    <path d="M52 58h18L52 76z" fill="#10151e" stroke="currentColor" stroke-width="2" stroke-linejoin="round"/>
+    <path d="M56 72h10M55 68l8-7" stroke="currentColor" stroke-width="1.3" stroke-linecap="round"/>
+  </symbol>
+  <symbol id="fig-dev" viewBox="0 0 80 100">
+    <path d="M32 16l3-8M42 13l1-8M52 17l6-7" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"/>
+    <path d="M22 34c1-12 8-18 18-18 5 0 8 2 11 2 3-3 6-2 8 1 5 7 6 16 3 22" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"/>
+    <circle cx="40" cy="32" r="10" fill="#10151e" stroke="currentColor" stroke-width="2.2"/>
+    <path d="M16 52c5-10 12-14 24-14s19 4 24 14c3 2 8 8 8 16v4H16v-6c0-6 0-12 0-14z" fill="#10151e" stroke="currentColor" stroke-width="2.2"/>
+    <rect x="20" y="64" width="40" height="22" rx="3" fill="#10151e" stroke="currentColor" stroke-width="2"/>
+    <path d="M30 74l-5 4 5 4M50 74l5 4-5 4M39 80l5-14" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"/>
+  </symbol>
+  <symbol id="fig-test" viewBox="0 0 80 100">
+    <circle cx="38" cy="12" r="5.5" fill="#10151e" stroke="currentColor" stroke-width="2"/>
+    <path d="M30 22c2-4 5-6 8-6s6 2 8 6" fill="none" stroke="currentColor" stroke-width="2"/>
+    <circle cx="38" cy="30" r="10" fill="#10151e" stroke="currentColor" stroke-width="2.2"/>
+    <path d="M24 52c2-12 7-16 14-16s12 4 14 16l8 24H16z" fill="#10151e" stroke="currentColor" stroke-width="2.2" stroke-linejoin="round"/>
+    <path d="M32 60l4 4 8-9" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+    <circle cx="62" cy="56" r="11" fill="#10151e" stroke="currentColor" stroke-width="2"/>
+    <circle cx="62" cy="56" r="6" fill="none" stroke="currentColor" stroke-width="1.4"/>
+    <path d="M70 64l8 9" stroke="currentColor" stroke-width="2.6" stroke-linecap="round"/>
+  </symbol>
+  <symbol id="fig-ops" viewBox="0 0 80 100">
+    <path d="M24 28c0-11 7-16 16-16s16 5 16 16" fill="none" stroke="currentColor" stroke-width="2.2"/>
+    <circle cx="36" cy="32" r="10" fill="#10151e" stroke="currentColor" stroke-width="2.2"/>
+    <circle cx="22" cy="34" r="3.2" fill="#10151e" stroke="currentColor" stroke-width="1.8"/>
+    <path d="M22 37c3 7 7 9 10 8" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/>
+    <path d="M22 58c1-13 6-18 14-18s13 5 14 18v16H22z" fill="#10151e" stroke="currentColor" stroke-width="2.2"/>
+    <rect x="30" y="58" width="11" height="8" rx="1" fill="none" stroke="currentColor" stroke-width="1.6"/>
+    <rect x="58" y="44" width="15" height="9" rx="1.5" fill="#10151e" stroke="currentColor" stroke-width="1.7"/>
+    <rect x="58" y="56" width="15" height="9" rx="1.5" fill="#10151e" stroke="currentColor" stroke-width="1.7"/>
+    <rect x="58" y="68" width="15" height="9" rx="1.5" fill="#10151e" stroke="currentColor" stroke-width="1.7"/>
+    <circle cx="69" cy="48.5" r="1.5" fill="currentColor"/>
+    <circle cx="69" cy="60.5" r="1.5" fill="currentColor"/>
+    <circle cx="69" cy="72.5" r="1.5" fill="currentColor"/>
+  </symbol>
+</svg>
+<header class="bar">
+  <nav>
+    <a href="#overview">总览</a>
+    <a href="#flow">研发流程</a>
+    <a href="#ai">AI发展史</a>
+  </nav>
+</header>
+<div class="progress" id="progress"></div>
+<main>
+<section id="overview">
+  <div class="head">
+    <span class="tag">OVERVIEW</span>
+    <h2>总览</h2>
+  </div>
+  <div class="cloud" aria-label="本次要回答的问题">
+    <span class="drop p1"><span class="q c1">手机银行 APP 有 3000 多个功能，如何进行研发？</span></span>
+    <span class="drop p2"><span class="q c2">出了问题如何定责？</span></span>
+    <span class="drop p5"><span class="q c5">需求定稿后研发侧会发生什么？</span></span>
+    <span class="drop p6"><span class="q c6">transformer如何一步步到LLM？</span></span>
+  </div>
+  <div class="topics">
+    <a href="#flow"><small class="tag">02</small><b>研发流程介绍</b></a>
+    <a href="#ai"><small class="tag">03</small><b>AI 发展简史</b></a>
+  </div>
+</section>
 
-.event-people{grid-column:1/-1;border-top:1px solid #ffffff16;padding-top:24px;margin-top:2px}.event-people-heading{display:flex;justify-content:space-between;align-items:center;margin-bottom:14px}.event-count{font:10px monospace;color:#79869c}.event-people-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:10px}.researcher{padding:17px;border:1px solid #ffffff14;border-radius:13px;background:#ffffff05}.researcher h4{margin:0 0 6px;font-size:15px;font-weight:450}.researcher>span{color:#a7c6ff;font:10px monospace}.researcher p{margin:10px 0 0;color:#a5a8b2;font-size:12px;line-height:1.8}@media(max-width:720px){.event-people-grid{grid-template-columns:1fr}.timeline .detail{max-height:none}}
-</style></head><body>
-<header class="bar"><b>AI发展介绍</b><nav><a href="#timeline">发展年表</a><a href="ai_introduce.html">年表放映</a><a href="#learning">学习原理</a><a href="#engines">驱动力</a><a href="#future">未来</a></nav><span class="tag">人工智能 · 发展史</span></header><div class="progress" id="progress"></div>
-<main><section class="hero"><div class="orb"></div><div><span class="tag">A BRIEF HISTORY OF ARTIFICIAL INTELLIGENCE</span><h1>AI发展介绍</h1><p>从一个大胆的问题，到一种新的创造力。<br>这是人类教机器思考的故事。</p></div><div class="scroll">向下，进入智能时代</div></section>
-<section class="intro"><div class="reveal"><span class="tag">01 / THE QUESTION</span><h2>机器，<br>能思考吗？</h2><p>1950 年，艾伦·图灵把这个问题变成了一场游戏。七十多年后，它依然是人工智能故事的起点。我们沿着一次次突破，走进机器学习、深度学习，直到今天的大模型。</p></div><div class="card reveal"><span class="tag">A QUESTION THAT CHANGED EVERYTHING</span><p><b>Can machines think?</b></p><p>图灵测试不再追问机器有没有意识，而是让我们观察：它能否展现出与人相似的智能行为？</p></div></section>
-<section class="timeline" id="timeline"><div class="head reveal"><span class="tag">02 / THE MILESTONES</span><h2>每一次浪潮，<br>都始于一个新想法。</h2><p>点击时间节点，看看研究者如何一次次拓展机器的能力边界。</p></div><div class="years" id="years" aria-label="人工智能发展事件时间线，可横向滚动"></div><div class="timeline-hint">← 横向滑动 / 滚动浏览全部事件 →</div><div class="detail" id="detail"></div></section>
-<section class="learning" id="learning"><div class="sticky"><div class="copy"><span class="tag" id="step">03 / FROM RULES TO LEARNING</span><h2 id="title">从规则出发</h2><p id="desc">早期人工智能像一张精密的流程图：人类写下规则，机器按照逻辑一步步推演。只要规则覆盖了问题，机器就能给出确定答案。</p><div class="formula" id="formula">IF 条件 → THEN 结论</div><p class="example" id="example">例子：专家系统根据规则判断症状。</p><div class="controls"><button class="active" data-mode="rules">规则系统</button> <button data-mode="learn">机器学习</button> <button data-mode="deep">深度学习</button></div></div><div class="network"><svg id="svg" viewBox="0 0 600 500"></svg><span class="label" style="left:0;top:50%">INPUT</span><span class="label" style="right:0;top:50%">OUTPUT</span></div></div></section>
-<section class="principles" id="engines"><div class="head reveal"><span class="tag">04 / THE ENGINES</span><h2>三种力量，<br>驱动智能前行。</h2><p>算力、数据与算法相互作用，推动人工智能从实验室走向日常生活。</p></div><div class="grid"><article class="tile reveal"><small>01 — COMPUTE</small><div class="viz">▁ ▃ ▄ ▆ ▇</div><h3>算力，让规模成为可能</h3><p>专用芯片和并行计算，让训练更庞大的模型成为现实，打开新的实验空间。</p></article><article class="tile reveal"><small>02 — DATA</small><div class="viz"><div class="ring"></div></div><h3>数据，提供经验样本</h3><p>文本、图像与声音构成学习材料。数据越丰富，模型越有机会捕捉世界中的模式。</p></article><article class="tile reveal"><small>03 — ALGORITHM</small><div class="viz">◉ ⟶ ◉ ⟶ ◉</div><h3>算法，寻找模式与关系</h3><p>算法决定机器如何从样本中提取规律、调整参数，并把所学应用到新问题。</p></article></div></section>
-<section class="future" id="future"><div class="reveal"><span class="tag">05 / WHAT COMES NEXT</span><h2>故事仍在<br>继续书写。</h2><p>人工智能不只是技术史，也是一段关于人的故事。我们创造工具，也不断重新思考创造、责任与智能本身意味着什么。</p><div class="chips"><button data-topic="多模态交互">多模态交互</button><button data-topic="AI 智能体">AI 智能体</button><button data-topic="具身智能">具身智能</button><button data-topic="可信与安全">可信与安全</button></div></div></section></main><div class="modal" id="modal" role="dialog" aria-modal="true"><div class="modal-box"><button class="modal-close" id="modalClose">关闭 ×</button><span class="tag" id="modalTag"></span><h3 id="modalTitle"></h3><div id="modalBody"></div></div></div><footer><span>AI发展介绍 · 人工智能发展史</span><span>一段仍在发生的历史</span></footer>
+<div class="role-row" hidden>
+      <button class="who pm" type="button">
+        <svg class="fig"><use href="#fig-pm"/></svg>
+        <b>项目经理</b>
+        <span class="tip">负责「按节奏做成」。拆计划、协调基地和依赖、把风险摆到桌面上，保证拆开之后仍然交得上。</span>
+      </button>
+      <button class="who product" type="button">
+        <svg class="fig"><use href="#fig-product"/></svg>
+        <b>产品经理</b>
+        <span class="tip">负责「做什么」。把业务目标写成需求、优先级和验收标准，并在上线后核对结果是否还是当初要的那个。</span>
+      </button>
+      <button class="who architect" type="button">
+        <svg class="fig"><use href="#fig-arch"/></svg>
+        <b>架构师</b>
+        <span class="tip">负责「怎样拆、怎样连」。划定边界、关键方案，以及容量、安全和一致性等约束，避免局部改动弄坏整体。</span>
+      </button>
+      <button class="who dev" type="button">
+        <svg class="fig"><use href="#fig-dev"/></svg>
+        <b>开发经理</b>
+        <span class="tip">负责「把方案做成可运行的系统」。组织编码、评审和修复，对实现是否符合设计、能否进入测试负责。</span>
+      </button>
+      <button class="who test" type="button">
+        <svg class="fig"><use href="#fig-test"/></svg>
+        <b>测试经理</b>
+        <span class="tip">负责「证明它能进生产」。制定测试策略和准出标准，把该发现的缺陷挡在发布之前。</span>
+      </button>
+      <button class="who ops" type="button">
+        <svg class="fig"><use href="#fig-ops"/></svg>
+        <b>运维经理</b>
+        <span class="tip">负责「上线之后仍然稳住」。看监控和告警，处理发布与回滚，对生产环境的可用性负责。</span>
+      </button>
+    </div>
+
+<section id="flow">
+  <div class="head">
+    <span class="tag">02 / PROCESS</span>
+    <h2>研发流程介绍</h2>
+  </div>
+  <article class="flow-block">
+    <span class="tag">2.1 情景假设</span>
+    <p>假设你是扎克伯格，你开发出了一个给校内同学照片打分的小网站，然后它突然火了……</p>
+  </article>
+  <article class="flow-block">
+    <span class="tag">2.2</span>
+    <h3>系统建设越来越复杂，需要考虑哪些情况？</h3>
+    <div class="cases">
+      <article><b>1. 数据爆炸</b></article>
+      <article><b>2. 并发爆炸</b></article>
+      <article><b>3. 系统可读性、可维护性下降</b></article>
+    </div>
+  </article>
+  <article class="flow-block">
+    <span class="tag">2.3</span>
+    <h3>引入新的流程和技术</h3>
+    <p class="note">流程</p>
+    <div class="cases">
+      <article><b>DevOps</b></article>
+    </div>
+    <p class="note">技术</p>
+    <div class="cases">
+      <article><b>1. Git 代码管理</b></article>
+      <article><b>2. Docker 容器化</b></article>
+    </div>
+  </article>
+  <article class="flow-block net-block">
+    <span class="tag">2.4 责任网络</span>
+    <h3>当一个问题“出了问题”，责任到底属于谁？</h3>
+    <p>把复杂的软件交付责任，像神经网络一样展开。三个应用各自经过同样的六类角色，最后汇到同一个结果。</p>
+    <div class="net" id="dutyNet">
+      <div class="net-apps">
+        <article class="net-app" data-app="0"><small>APP 01</small><b>应用一 · 核心业务</b><span>需求 / 设计 / 开发 / 运行</span></article>
+        <article class="net-app" data-app="1"><small>APP 02</small><b>应用二 · 客户服务</b><span>渠道 / 服务 / 数据</span></article>
+        <article class="net-app" data-app="2"><small>APP 03</small><b>应用三 · 数据平台</b><span>数据 / 模型 / 基础设施</span></article>
+      </div>
+      <div class="net-people" id="netPeople"></div>
+      <div class="loss" id="lossNode"><strong>LOSS</strong><small>责任损失</small></div>
+      <svg class="net-lines" id="netLines"></svg>
+    </div>
+    <p class="net-duty" id="netDuty">出了生成问题，如何划分责任？18 个角色、3 个应用、多条协作链路，谁对最终结果负责？</p>
+  </article>
+</section>
+
+<section id="ai">
+  <div class="head">
+    <span class="tag">03 / AI HISTORY</span>
+    <h2>AI 发展简史</h2>
+    <p>一条曲线就够看清起伏：热度过两次高峰，也掉进过两次低谷，最后才陡峭起来。</p>
+  </div>
+  <div class="formula">
+    <span>1 次重要会议</span>
+    <span>2 次寒冬</span>
+    <span>2 种路线</span>
+    <span>1 次转折点的比赛</span>
+  </div>
+  <figure class="chart">
+    <svg viewBox="0 0 800 380" role="img" aria-label="AI 热度随时间变化：达特茅斯会议后抬升，两次寒冬回落，2012 年转折后陡升至 ChatGPT。">
+      <line class="axis" x1="72" y1="36" x2="72" y2="292"/>
+      <line class="axis" x1="72" y1="292" x2="760" y2="292"/>
+      <path class="axis" d="M72 36 L66 48 L78 48 Z"/>
+      <path class="axis" d="M760 292 L748 286 L748 298 Z"/>
+      <text x="84" y="48">热度</text>
+      <text x="724" y="278">时间</text>
+      <path class="curve" d="M86 214 C128 196 142 152 152 156 C186 164 206 236 242 232 C286 226 314 188 356 196 C396 204 426 236 476 228 C516 216 546 188 588 158 C612 120 648 52 704 38"/>
+      <circle class="dot" cx="152" cy="156" r="5"/>
+      <circle class="dot" cx="242" cy="232" r="5"/>
+      <circle class="dot" cx="356" cy="196" r="5"/>
+      <circle class="dot" cx="476" cy="228" r="5"/>
+      <circle class="dot" cx="588" cy="158" r="5"/>
+      <circle class="dot" cx="704" cy="38" r="5"/>
+      <text x="106" y="140">1956 达特茅斯</text>
+      <text x="196" y="262">第一次寒冬</text>
+      <text x="310" y="178">专家系统</text>
+      <text x="428" y="258">第二次寒冬</text>
+      <text x="418" y="168">深度学习崛起</text>
+      <text x="446" y="136">2012 AlexNet</text>
+      <text class="dim" x="468" y="114">转折点的比赛</text>
+      <text x="628" y="26">ChatGPT</text>
+    </svg>
+  </figure>
+  <div class="ai-go"><a href="ai_introduce.html">进入年表放映 →</a></div>
+  <article class="flow-block learn">
+    <span class="tag">3.1 概念</span>
+    <h3>神经网络相关概念</h3>
+    <div class="quad">
+      <article class="lift"><b>前向传播</b><span>输入从左边一层层算到输出。</span></article>
+      <article class="lift"><b>反向传播</b><span>把输出端的误差分回每一层的权重。</span></article>
+      <article class="lift"><b>LOSS</b><span>预测和目标差多少。训练就是把这个差距压小。</span></article>
+      <article class="lift"><b>过拟合</b><span>训练数据上很好，换一批新数据就变差。</span></article>
+    </div>
+  </article>
+  <article class="flow-block learn wide">
+    <span class="tag">3.2 算法演进</span>
+    <h3>算法怎么一步步补上缺口</h3>
+    <div class="algo-scroll">
+      <table class="algo">
+        <thead>
+          <tr><th>算法名称</th><th>突出特点</th><th>补上的缺口</th><th>适用场景</th></tr>
+        </thead>
+        <tbody>
+          <tr><td>单层感知机</td><td>输入乘上权重，过了阈值就做判断，并能按例子改权重。</td><td>判断原先主要靠人把规则写完。</td><td>线性可分的简单分类。</td></tr>
+          <tr><td>多层感知机</td><td>中间再叠几层，决策边界可以弯曲。</td><td>单层只能画一条直线，处理不了异或。</td><td>需要把特征组合起来的分类。</td></tr>
+          <tr><td>反向传播</td><td>误差从输出往前传，每一层按自己的责任改权重。</td><td>多层叠起来之后，不知道每一层该改多少。</td><td>训练多层网络。</td></tr>
+          <tr><td>CNN</td><td>只看局部，同一组检测器在整张图上滑动。</td><td>全连接看图像时参数爆炸，也看不见邻近像素的结构。</td><td>图像和有局部结构的数据。</td></tr>
+          <tr><td>激活函数</td><td>线性求和之后加一层非线性，例如 ReLU。</td><td>没有非线性时，叠很多层仍等于一层。它补的是这个缺口，不是 CNN 的缺口。</td><td>任何需要多层组合的网络。</td></tr>
+          <tr><td>残差网络</td><td>隔几层加一条直连，让深层网络学“还差多少”。</td><td>网络继续加深后更难训练，甚至比浅层更差。</td><td>很深的视觉网络。</td></tr>
+          <tr><td>词向量</td><td>把词写成连续向量，意思相近的词在空间里靠近。</td><td>词如果只是离散符号，模型看不出近义。这里换成了语言这条线。</td><td>文本表示、检索和语言模型的输入。</td></tr>
+          <tr><td>LSTM</td><td>用输入门、遗忘门和输出门决定记住什么、丢掉什么。</td><td>普通循环网络记不住长句子，梯度也会沿时间消失。</td><td>早期的序列、翻译和语音。</td></tr>
+          <tr><td>Transformer</td><td>自注意力让任意两个位置直接比较，训练也可以并行。</td><td>LSTM 必须逐步计算，远距离的词不容易互相影响。</td><td>翻译、预训练语言模型和大模型的骨架。</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </article>
+  <article class="flow-block learn">
+    <span class="tag">3.3 到 LLM</span>
+    <h3>从 Transformer 到 LLM</h3>
+    <div class="steps">
+      <article class="lift"><small>01</small><b>预训练</b><span>用大量文本预测下一个词，先学会语言的统计规律。</span></article>
+      <article class="lift"><small>02</small><b>把规模加大</b><span>参数、数据和算力一起上去，只给几个例子也能尝试新任务。</span></article>
+      <article class="lift"><small>03</small><b>指令微调</b><span>用问题和标准回答继续训练，让它按人的要求说话。</span></article>
+      <article class="lift"><small>04</small><b>人类反馈</b><span>人来偏好排序，把“续写下一个词”调成可以对话。</span></article>
+    </div>
+  </article>
+  <article class="flow-block learn wide">
+    <span class="tag">3.4 术语</span>
+    <h3>大模型相关知识</h3>
+    <div class="gloss">
+      <article class="lift"><b>PROMPT</b><span>这一次交给模型的任务说明。</span></article>
+      <article class="lift"><b>上下文</b><span>模型在这一轮里能看见的全部内容。</span></article>
+      <article class="lift"><b>微调</b><span>用专门数据，继续改已经预训练好的权重。</span></article>
+      <article class="lift"><b>RAG</b><span>先检索资料，再按资料生成，减少凭空编。</span></article>
+      <article class="lift"><b>SKILL</b><span>打包好的做法和工具说明，需要时再加载。</span></article>
+      <article class="lift"><b>AGENT</b><span>拆开步骤、调用工具、看过结果再继续。</span></article>
+      <article class="lift"><b>HARNESS</b><span>套在模型外面的运行骨架，管循环、权限、工具和何时停下。</span></article>
+      <article class="lift"><b>MCP</b><span>模型连接外部工具和数据的一种开放协议。</span></article>
+      <article class="lift"><b>记忆机制</b><span>把这一次之外的信息留下，下次还能用。</span></article>
+      <article class="lift"><b>安全护栏</b><span>拦住不该回答、不该执行的内容。</span></article>
+      <article class="lift"><b>OpenClaw</b><span>开源的智能体运行框架，把模型、工具和渠道接在一起。</span></article>
+    </div>
+  </article>
+  <article class="flow-block learn wide">
+    <span class="tag">3.5 原因</span>
+    <h3>大模型变得更聪明的原因</h3>
+    <div class="reason">
+      <article class="lift"><b>规模效应</b><span>参数、数据和算力一起变大，新的用法才会出现。</span></article>
+      <article class="lift"><b>指令微调 SFT</b><span>用“问题—回答”教它按要求说话。</span></article>
+      <article class="lift"><b>人类反馈强化学习</b><span>让人更偏好的回答更容易被选中。</span></article>
+      <article class="lift"><b>推理策略 CoT</b><span>先把步骤想出来，再给答案。</span></article>
+      <article class="lift"><b>预训练数据质量</b><span>喂进去的文本干净、多样，比单纯堆字数更要紧。</span></article>
+    </div>
+  </article>
+  <article class="flow-block learn">
+    <span class="tag">3.6 名字</span>
+    <h3>DeepSeek V3.0 0324 671B</h3>
+    <div class="name-parts">
+      <article class="lift"><small>模型品牌</small><b>DeepSeek</b></article>
+      <article class="lift"><small>主版本号.子版本号</small><b>V3.0</b></article>
+      <article class="lift"><small>发布日期标记</small><b>0324</b></article>
+      <article class="lift"><small>总参数量</small><b>671B</b><span>6710 亿参数</span></article>
+    </div>
+    <p class="moe">MoE 混合专家架构。A37B 表示一次推理大约激活 370 亿参数，不是把 6710 亿全部算一遍。</p>
+  </article>
+  <article class="flow-block learn">
+    <span class="tag">3.7 参数</span>
+    <h3>参数是什么，层数谁来定</h3>
+    <p>参数主要是连接上的权重，再加上每个输出神经元一个偏置。神经元本身的个数只占很小一部分，到了大模型通常不到 1%。</p>
+    <p class="note">层数是人先定下来的。现在主流大模型大约六十多层。层数多，训练更贵，调用更慢，梯度也可能在中途变没。层数少，复杂的抽象关系学不出来。</p>
+  </article>
+  <article class="flow-block learn wide">
+    <span class="tag">3.8 训练</span>
+    <h3>训练一个大模型</h3>
+    <div class="scales">
+      <article class="lift">
+        <b>7B</b>
+        <ul>
+          <li>约 1 万亿 token</li>
+          <li>数百块 GPU，训练约一个月</li>
+          <li>一张消费级显卡就能跑</li>
+          <li>推理延迟毫秒级</li>
+          <li>部署大约数百元/月</li>
+          <li>日常对话够用</li>
+        </ul>
+      </article>
+      <article class="lift">
+        <b>70B</b>
+        <ul>
+          <li>约 10 万亿 token</li>
+          <li>数千块 GPU，训练约一个月</li>
+          <li>4 到 8 张专业级显卡</li>
+          <li>推理延迟秒级</li>
+          <li>部署数万元/月</li>
+          <li>日常对话质量优秀</li>
+        </ul>
+      </article>
+      <article class="lift">
+        <b>671B</b>
+        <ul>
+          <li>约 15 万亿 token</li>
+          <li>数万块 GPU，训练约一个月，仍可能不够充分</li>
+          <li>一次训练大约 557 万美元，约 4000 万人民币</li>
+        </ul>
+      </article>
+    </div>
+    <p class="note">再往上，对话质量的提升会变慢，多出来的参数不一定换成同样多的好用。能力可以粗看成三块：训练数据的质量约 40%，架构设计约 30%，训练策略约 20%，其余是算力和工程。</p>
+  </article>
+  <article class="flow-block learn wide">
+    <span class="tag">3.9 问题</span>
+    <h3>发展中暴露的问题</h3>
+    <div class="issues">
+      <article class="lift">
+        <svg viewBox="0 0 36 36" aria-hidden="true"><path d="M6 26l7-8 5 4 8-12"/><path d="M8 30h20"/></svg>
+        <b>投资泡沫</b>
+        <span>演示能做成，还不等于算力已经赚得回来。估值、芯片和产品故事会叠在一起。</span>
+      </article>
+      <article class="lift">
+        <svg viewBox="0 0 36 36" aria-hidden="true"><circle cx="12" cy="12" r="4"/><path d="M6 26c1-5 4-7 6-7s5 2 6 7"/><path d="M20 18h10M25 13v10"/></svg>
+        <b>结构性失业</b>
+        <span>一部分任务被模型接走，人转向核对、设计和处理例外。不是所有岗位同时消失。</span>
+      </article>
+      <article class="lift">
+        <svg viewBox="0 0 36 36" aria-hidden="true"><path d="M18 6v4M18 10l-10 14h20z"/><path d="M8 28h20"/></svg>
+        <b>伦理</b>
+        <span>训练数据里的偏见会被说出来；生成内容可能冒充真人；拿来训练的文本和图片还有权利问题。</span>
+      </article>
+      <article class="lift">
+        <svg viewBox="0 0 36 36" aria-hidden="true"><path d="M18 6l10 4v8c0 7-4 11-10 13-6-2-10-6-10-13V10z"/></svg>
+        <b>安全</b>
+        <span>有人用提示把模型带离原定规则；编造的事实会被当成依据；工具权限过大时，错一步就发生在系统里。</span>
+      </article>
+    </div>
+  </article>
+</section>
+
+
+</main>
+<footer><span>总览 · 研发流程 · AI发展史</span></footer>
 <script>
-const data=[
-['1950','图灵测试','一个问题，开启新的想象。','艾伦·图灵在论文《计算机器与智能》中提出“机器能思考吗？”，并设计“模仿游戏”：由评审通过文字交流判断对方是人还是机器。这让抽象的智能问题第一次有了可讨论、可检验的形式。','问题的诞生','<g fill="none" stroke="#a9caff" stroke-width="2"><rect x="145" y="55" width="190" height="120" rx="12"/><path d="M170 90h95M170 112h135M170 134h80"/><circle cx="390" cy="112" r="40"/><path d="M335 112h15M290 175v30h100v-30"/><circle class="art-glow" cx="390" cy="112" r="8" fill="#b6d4ff"/></g>','模仿游戏：用对话观察机器是否展现出类似人类的智能行为。'],
-['1956','AI 诞生','人工智能成为正式研究领域。','在达特茅斯夏季研究项目上，约翰·麦卡锡等研究者提出“人工智能”这一名称。他们相信，学习、推理等智能特征或许能够被精确描述，并由机器模拟。这个乐观的起点建立了长期研究议程。','研究领域正式命名','<g fill="none" stroke="#a9caff" stroke-width="2"><path d="M115 160h290M145 160V90h230v70M175 90V65h170v25M200 110h120M200 130h120"/><circle cx="145" cy="90" r="8" fill="#b6d4ff"/><circle cx="375" cy="90" r="8" fill="#b6d4ff"/><path d="M190 160v30m140-30v30"/></g>','一场夏季研讨会，为新学科命名，也凝聚了早期研究社群。'],
-['1970s','第一次寒冬','雄心遇上现实，期待降温。','早期程序在封闭、清晰的任务里表现不错，但真实世界充满例外，手写规则难以扩展。算力有限、数据稀缺，机器翻译与通用推理等承诺未能兑现，资助和产业兴趣随之下降。低潮也促使研究者重新审视问题边界。','规则系统遇到瓶颈','<g fill="none" stroke="#a9caff" stroke-width="2"><path d="M120 70v120h270M145 92l45 35 40-18 45 54 42-30 55 40"/><path d="M145 90l45 35 40-18 45 54 42-30 55 40" stroke="#7898c9"/><path d="M120 190h270" stroke-dasharray="5 7"/><circle cx="320" cy="163" r="8" fill="#b6d4ff"/></g>','过度承诺与现实能力之间的落差，带来了研究资金和关注度的退潮。'],
-['1980s','专家系统','把专家知识写进机器。','专家系统把医生、工程师等领域专家的经验整理成“如果……那么……”规则，再由推理引擎匹配事实并给出建议。它们在诊断、配置等窄领域展现商业价值；但维护规则成本高，面对新情境仍显脆弱。','知识工程兴起','<g fill="none" stroke="#a9caff" stroke-width="2"><path d="M255 55v36M255 91l-90 45m90-45 90 45M165 136v45m90-45v45m90-45v45"/><rect x="220" y="50" width="70" height="42" rx="9"/><rect x="130" y="180" width="70" height="34" rx="8"/><rect x="220" y="180" width="70" height="34" rx="8"/><rect x="310" y="180" width="70" height="34" rx="8"/><circle class="art-glow" cx="255" cy="70" r="5" fill="#b6d4ff"/></g>','规则库 + 推理引擎：把专家经验编码成可执行的判断路径。'],
-['1987—93','第二次寒冬','专家系统退潮，AI 再入低谷。','专家系统的维护成本与脆弱性逐渐显现，专用 Lisp 机器市场收缩；同时，资金和产业预期回落。第二次寒冬提醒研究者：窄领域规则虽能创造价值，却难以低成本扩展到开放世界。','专家系统泡沫与产业退潮','<g fill="none" stroke="#a9caff" stroke-width="2"><path d="M120 66h260M145 90v90m70-90v90m70-90v90m70-90v90M125 180h250"/><path d="M130 85l60 24 60-10 65 39 65 28"/><path d="M175 65l-10 15m10-15 10 15m70-15-10 15m10-15 10 15m70-15-10 15m10-15 10 15"/><circle cx="330" cy="148" r="8" fill="#b6d4ff"/></g>','1980 年代繁荣的专家系统难以维护，商业泡沫破裂后研究经费再度收缩。'],
-['1997','深蓝胜利','专用计算击败国际象棋冠军。','IBM“深蓝”在正式比赛中战胜世界冠军加里·卡斯帕罗夫。它并非像人一样理解棋局，而是快速搜索可能棋步、评估局面，并借助专用硬件探索大量变化。这场胜利展示了计算能力在明确规则问题上的力量。','策略搜索里程碑','<g fill="none" stroke="#a9caff" stroke-width="2"><rect x="178" y="54" width="155" height="145" rx="12"/><path d="M195 75h121v104H195zM215 75v104m40-104v104m40-104v104M195 110h121m-121 35h121"/><circle cx="215" cy="95" r="8" fill="#b6d4ff"/><circle cx="295" cy="128" r="8" fill="#b6d4ff"/><path d="M335 120h75m-15-15 15 15-15 15"/></g>','搜索树越深，能评估的棋局变化越多；算力与策略共同带来突破。'],
-['2006','深度学习复兴','更深的网络重新获得关注。','研究者提出逐层预训练等方法，缓解深层网络训练困难；算力、数据和算法进步汇合，神经网络重新走向主流，并为 2012 年后的视觉突破铺路。','深层网络训练方法改进','<g fill="none" stroke="#a9caff" stroke-width="2"><path d="M115 176h270M145 155l45-32 45 18 45-57 45 29 45-66"/><path d="M145 155l45-32 45 18 45-57 45 29 45-66" stroke-dasharray="5 6"/><circle class="art-glow" cx="370" cy="47" r="9" fill="#b6d4ff"/></g>','更好的训练策略与不断增长的计算资源，让深层神经网络再次可行。'],
-['2012','深度学习','神经网络在图像识别中突破。','AlexNet 在 ImageNet 图像识别竞赛中显著降低错误率，深层卷积神经网络由此受到广泛关注。GPU 加速、大规模标注数据与反向传播训练方法相互配合，形成新的技术浪潮，随后扩展到语音、翻译等任务。','数据 × 算力 × 深度网络','<g fill="none" stroke="#a9caff" stroke-width="2"><rect x="110" y="75" width="74" height="74" rx="9"/><circle cx="147" cy="112" r="18"/><path d="M195 112h35m0 0-10-10m10 10-10 10M260 62v100m60-100v100m60-100v100"/><g fill="#b6d4ff"><circle cx="260" cy="80" r="7"/><circle cx="260" cy="112" r="7"/><circle cx="260" cy="144" r="7"/><circle cx="320" cy="80" r="7"/><circle cx="320" cy="112" r="7"/><circle cx="320" cy="144" r="7"/><circle cx="380" cy="112" r="8"/></g><path d="M184 112h75M267 80l53 32m-53 0h53m-53 32 53-32m7 0h53"/></g>','神经网络从像素逐层学习边缘、纹理等特征，自动完成图像分类。'],
-['2017','Transformer','注意力机制重塑语言模型。','研究者提出 Transformer，以注意力机制处理序列，减少循环计算并提升并行训练效率。它最初用于机器翻译，后来成为大语言模型的重要架构基础。','序列建模的新架构','<g fill="none" stroke="#a9caff" stroke-width="2"><circle cx="140" cy="125" r="23"/><circle cx="250" cy="75" r="23"/><circle cx="250" cy="175" r="23"/><circle cx="365" cy="125" r="23"/><path d="M163 125l64-45m-64 45 64 45m23-45h56m-44-12 16 12-16 12"/><circle class="art-glow" cx="365" cy="125" r="8" fill="#b6d4ff"/></g>','自注意力让模型直接衡量序列中不同位置之间的关系。'],
-['2022+','生成式 AI','机器开始生成语言、图像与代码。','大语言模型通过预测文本中的下一个词，从海量语料中学习语言结构与知识关联，再经指令微调提升对话能力。扩散模型等生成技术也让文字转图像成为日常工具。模型能生成流畅内容，但输出仍需核验。','从识别走向生成','<g fill="none" stroke="#a9caff" stroke-width="2"><rect x="115" y="67" width="180" height="125" rx="12"/><path d="M138 94h130M138 117h110M138 140h124M138 163h76"/><path d="M320 130c0-38 28-68 62-68s62 30 62 68-28 68-62 68-62-30-62-68z" stroke-dasharray="4 7"/><circle class="art-glow" cx="382" cy="130" r="22" fill="#b6d4ff"/><path d="M295 130h25"/></g>','生成模型根据提示与上下文生成新内容，协作体验变得更自然。']
-];
-data[0][7]=[['艾伦·图灵','计算理论 · 机器智能','1950 年在《计算机器与智能》中提出“模仿游戏”，把“机器会不会思考”转化为可观察的对话行为问题。']];
-data[1][7]=[['约翰·麦卡锡','人工智能 · Lisp','提出“人工智能”这一名称，并组织达特茅斯研究项目；此后推动逻辑推理、知识表示和 AI 研究机构建设。'],['马文·明斯基','人工智能 · 知识表示','达特茅斯项目参与者，长期研究机器智能、知识表示与学习，是早期 AI 学科的重要建制者。'],['克劳德·香农','信息论 · 计算机象棋','共同参与达特茅斯项目；他关于信息、逻辑电路和机器下棋的工作为计算智能提供了重要理论背景。'],['艾伦·纽厄尔 & 赫伯特·西蒙','符号推理 · 问题求解','与 Clifford Shaw 合作开发 Logic Theorist 等程序，探索如何用符号搜索表示人类推理过程。']];
-data[2][7]=[['马文·明斯基 & 西摩·帕珀特','感知机研究 · AI 寒冬背景','他们对感知机能力边界的分析引发重要学术讨论。它是当时多重因素之一；资金收缩还与算力、数据和过度承诺等现实落差有关。']];
-data[3][7]=[['爱德华·费根鲍姆','专家系统 · 知识工程','推动把领域专家知识编码为规则，并发展 DENDRAL 等专家系统，展示 AI 在专门任务上的商业价值。'],['爱德华·肖特利夫','医学 AI · MYCIN','主持开发 MYCIN 医疗专家系统，用规则和推理为细菌感染与用药建议提供辅助。']];
-data[4][7]=[['研究机构与产业团队','专家系统退潮 · 产业收缩','这一阶段并没有单一“寒冬制造者”。专家系统维护昂贵、泛化有限，产业泡沫与资助收缩共同促成低谷。']];
-data[5][7]=[['冯·许（Feng-hsiung Hsu）','深蓝硬件与搜索','IBM 深蓝项目核心设计者之一，参与打造专用国际象棋计算机及其高效搜索系统。'],['穆雷·坎贝尔','深蓝 · 棋局评估','深蓝研究团队成员，参与棋局评估函数和搜索算法研发。']];
-data[6][7]=[['杰弗里·辛顿','深度学习复兴','辛顿等研究者通过逐层预训练等探索，推动深层神经网络重新获得研究关注。'],['约书亚·本吉奥','深度生成模型','他与合作者发展深度学习和表示学习方法，帮助建立新一轮神经网络研究基础。']];
-data[7][7]=[['杰弗里·辛顿','深度学习 · 神经网络','长期推动神经网络和反向传播等方法的发展，为多层网络从数据中学习提供重要基础。'],['亚历克斯·克里热夫斯基 & 伊利亚·苏茨克维','AlexNet · 大规模视觉','与辛顿合作训练 AlexNet，在 2012 年 ImageNet 竞赛中展示深层卷积网络与 GPU 训练的威力。'],['李飞飞','ImageNet · 数据基准','发起并推动 ImageNet 建设，为视觉算法提供大规模图像样本和统一竞赛基准。']];
-data[8][7]=[['Ashish Vaswani 等八位作者','Transformer · 注意力机制','共同发表《Attention Is All You Need》，提出仅基于注意力机制的 Transformer 架构；这项团队成果成为现代语言模型的重要基础。']];
-data[9][7]=[['Alec Radford 等 GPT 研究团队','生成式预训练 · 语言模型','通过 GPT 系列研究展示先在海量文本上预训练、再迁移到多种语言任务的路线，推动生成式模型走向大众使用。'],['研究共同体','指令微调 · 人类反馈','来自多所高校与实验室的团队继续发展指令微调、偏好学习和多模态生成，让模型更易交互；当前能力来自长期积累，不由单一人物完成。']];
-
-const years=document.querySelector('#years'),detail=document.querySelector('#detail');data.forEach((d,i)=>{let b=document.createElement('button');b.className='year';b.innerHTML=`<i></i><small>${d[0]}</small><strong>${d[1]}</strong><span>${d[2]}</span>`;b.onclick=()=>{document.querySelectorAll('.year').forEach(x=>x.classList.remove('active'));b.classList.add('active');detail.style.opacity=0;setTimeout(()=>{detail.innerHTML=`<div><span class="tag">${d[0]} / ${d[1]}</span><h3>${d[1]}</h3><p>${d[3]}</p><p>${d[6]}</p><aside><b>发展节点</b>${d[4]}<br>推动下一次技术跃迁</aside></div><div class="history-art"><svg viewBox="0 0 500 250" role="img" aria-label="${d[1]}主题插画">${d[5]}</svg></div><div class="event-people"><div class="event-people-heading"><span class="tag">相关研究者 · 团队与贡献</span><span class="event-count">${(d[7]||[]).length} 组</span></div><div class="event-people-grid">${(d[7]||[]).map(person=>`<article class="researcher"><h4>${person[0]}</h4><span>${person[1]}</span><p>${person[2]}</p></article>`).join('')}</div></div>`;detail.style.opacity=1},180)};years.append(b)});years.firstChild.click();
-
-const modes={rules:['03 / FROM RULES TO LEARNING','从规则出发','早期人工智能像精密流程图：人类写下规则，机器按逻辑推演。只要规则覆盖问题，机器就能给出确定答案。','IF 条件 → THEN 结论','例子：专家系统判断发烧、咳嗽等症状是否符合某种疾病规则。'],learn:['03 / LEARNING FROM EXAMPLES','从经验中学习','机器学习不要求人类写出所有规则。我们提供例子，算法寻找模式，再把学到的规律用于新数据。','样本 + 目标 → 调整参数','例子：给邮件标注“垃圾邮件 / 正常邮件”，模型从词频、发件人等特征学会分类。'],deep:['03 / REPRESENTING THE WORLD','层层提取特征','深度学习使用多层神经网络，把输入逐层转换成更抽象的表示。训练时，预测误差反向传播，逐步调整连接权重。','输入 → 表示 → 预测','例子：照片经过多层网络提取边缘、形状和物体特征，最终识别出猫或狗。']};let mode='rules';let flashTimer;function network(m){clearInterval(flashTimer);let s=document.querySelector('#svg');s.innerHTML='';let layers=m==='rules'?[1,2,1]:m==='learn'?[4,5,3]:[4,6,6,3],p=layers.map((n,l)=>Array.from({length:n},(_,i)=>[50+l*500/(layers.length-1),250+(i-(n-1)/2)*Math.min(75,300/n)]));p.slice(0,-1).forEach((layer,l)=>layer.forEach(a=>p[l+1].forEach(b=>{let e=document.createElementNS('http://www.w3.org/2000/svg','line');e.setAttribute('x1',a[0]);e.setAttribute('y1',a[1]);e.setAttribute('x2',b[0]);e.setAttribute('y2',b[1]);e.setAttribute('class','edge');s.append(e)})));p.flat().forEach((a,i)=>{let n=document.createElementNS('http://www.w3.org/2000/svg','circle');n.setAttribute('cx',a[0]);n.setAttribute('cy',a[1]);n.setAttribute('r',10);n.setAttribute('class','node');s.append(n);});const pulse=()=>{let nodes=[...s.querySelectorAll('.node')];nodes.forEach((n,i)=>setTimeout(()=>{n.classList.add('flash');setTimeout(()=>n.classList.remove('flash'),700)},i*90))};pulse();flashTimer=setInterval(pulse,3000)}function setMode(m){if(m===mode)return;mode=m;let d=modes[m];['step','title','desc','formula'].forEach((id,i)=>document.getElementById(id).textContent=d[i]);let ex=document.getElementById('example');if(ex)ex.textContent=d[4];document.querySelectorAll('.controls button').forEach(b=>b.classList.toggle('active',b.dataset.mode===m));network(m)}document.querySelectorAll('.controls button').forEach(b=>b.onclick=()=>setMode(b.dataset.mode));network(mode);
-
-const modal=document.getElementById('modal'),modalData={
-算力:['让模型训练得更快、规模更大。GPU 等并行芯片可同时处理大量矩阵运算。例子：训练图像模型时，数千张图片可被拆成批次并行计算；推理阶段的算力则决定响应速度与成本。'],
-数据:['数据是模型观察世界的样本。数量、质量、覆盖范围和授权来源都会影响模型表现。例子：训练道路识别模型时，需要白天、夜晚、雨雪和不同道路场景的数据，否则容易在陌生环境中误判。'],
-算法:['算法规定模型如何表示信息、衡量误差并更新参数。例子：分类模型先给出预测，再与正确标签比较计算误差，通过梯度下降调整权重，反复迭代后逐渐提高准确度。'],
-多模态交互:['模型同时理解文字、图像、声音或视频。例子：上传一张冰箱照片并询问“能做什么晚餐”，模型结合图像识别食材和文本理解来给出建议。'],
-'AI 智能体':['智能体能围绕目标拆解步骤、调用工具并根据结果继续行动。例子：整理旅行计划时先查路线与天气，再汇总行程；重要操作仍应由人确认。'],
-具身智能:['让 AI 通过机器人等实体感知环境并执行动作。例子：机械臂识别桌面上的杯子，规划抓取路径并在碰到偏差时调整动作。'],
-可信与安全:['让系统更可靠、可解释并尊重隐私。例子：医疗辅助模型提供建议时标示依据与不确定性，由医生核验，而不把模型输出当成诊断。']};function openModal(topic){let body=modalData[topic];if(!body)return;document.getElementById('modalTag').textContent='AI / '+topic;document.getElementById('modalTitle').textContent=topic;document.getElementById('modalBody').innerHTML=`<p>${body[0]}</p>`;modal.classList.add('open')}document.querySelectorAll('.tile').forEach(t=>t.onclick=()=>openModal(t.querySelector('h3').textContent.split('，')[0]));document.querySelectorAll('.chips button').forEach(b=>b.onclick=()=>openModal(b.dataset.topic));document.getElementById('modalClose').onclick=()=>modal.classList.remove('open');modal.onclick=e=>{if(e.target===modal)modal.classList.remove('open')};document.addEventListener('keydown',e=>{if(e.key==='Escape')modal.classList.remove('open')});
-document.querySelectorAll('.people-filters button').forEach(button=>button.addEventListener('click',()=>{document.querySelectorAll('.people-filters button').forEach(item=>item.classList.toggle('active',item===button));document.querySelectorAll('.person').forEach(card=>{card.hidden=button.dataset.filter!=='all'&&card.dataset.group!==button.dataset.filter})}));
-const obs=new IntersectionObserver(es=>es.forEach(e=>{if(e.isIntersecting)e.target.classList.add('in')}),{threshold:.12});document.querySelectorAll('.reveal').forEach(x=>obs.observe(x));window.addEventListener('scroll',()=>{let max=document.documentElement.scrollHeight-innerHeight;document.querySelector('#progress').style.width=(scrollY/max*100)+'%';let r=document.querySelector('.learning').getBoundingClientRect(),p=Math.min(1,Math.max(0,-r.top/(r.height-innerHeight)));setMode(p<.34?'rules':p<.68?'learn':'deep')},{passive:true});
-</script></body></html>
+const cast=[...document.querySelectorAll('.role-row .who')];
+const host=document.getElementById('netPeople');
+const duty=document.getElementById('netDuty');
+const dutyHome=duty.textContent;
+for(let app=0;app<3;app++){
+  cast.forEach((who,r)=>{
+    const b=document.createElement('button');
+    b.type='button';
+    b.className='mini '+[...who.classList].find(c=>c!=='who');
+    b.dataset.app=String(app);
+    b.dataset.i=String(app*6+r);
+    b.dataset.duty=who.querySelector('b').textContent+'：'+who.querySelector('.tip').textContent;
+    b.setAttribute('aria-label',who.querySelector('b').textContent);
+    b.innerHTML=who.querySelector('svg').outerHTML+'<span>'+who.querySelector('b').textContent+'</span>';
+    host.appendChild(b);
+  });
+}
+const net=document.getElementById('dutyNet');
+const lines=document.getElementById('netLines');
+function drawDuty(){
+  const box=net.getBoundingClientRect();
+  if(box.width<20)return;
+  const apps=[...net.querySelectorAll('.net-app')];
+  const people=[...net.querySelectorAll('.mini')];
+  const loss=net.querySelector('.loss');
+  const c=el=>{const r=el.getBoundingClientRect();return{x:r.left+r.width/2-box.left,y:r.top+r.height/2-box.top}};
+  lines.setAttribute('viewBox','0 0 '+box.width+' '+box.height);
+  lines.replaceChildren();
+  const ns='http://www.w3.org/2000/svg';
+  const L=c(loss);
+  people.forEach(p=>{
+    const A=c(apps[+p.dataset.app]), B=c(p);
+    [[`M ${A.x} ${A.y} C ${(A.x+B.x)/2} ${A.y}, ${(A.x+B.x)/2} ${B.y}, ${B.x} ${B.y}`,'app-'+p.dataset.app],
+     [`M ${B.x} ${B.y} C ${B.x+80} ${B.y}, ${L.x-80} ${L.y}, ${L.x} ${L.y}`,'loss']
+    ].forEach(([d,extra])=>{
+      const e=document.createElementNS(ns,'path');
+      e.setAttribute('d',d);
+      e.setAttribute('class','link who-'+p.dataset.i+' '+extra);
+      lines.appendChild(e);
+    });
+  });
+}
+function hot(sel,text){
+  lines.querySelectorAll('.link').forEach(l=>l.classList.remove('hot'));
+  if(sel)lines.querySelectorAll(sel).forEach(l=>l.classList.add('hot'));
+  duty.textContent=text||dutyHome;
+}
+net.addEventListener('pointerover',e=>{
+  const mini=e.target.closest('.mini');
+  const app=e.target.closest('.net-app');
+  if(mini)hot('.who-'+mini.dataset.i,mini.dataset.duty);
+  else if(app)hot('.app-'+app.dataset.app,dutyHome);
+});
+net.addEventListener('pointerleave',()=>hot('',dutyHome));
+net.addEventListener('focusin',e=>{
+  const mini=e.target.closest('.mini');
+  if(mini)hot('.who-'+mini.dataset.i,mini.dataset.duty);
+});
+net.addEventListener('focusout',e=>{if(!net.contains(e.relatedTarget))hot('',dutyHome)});
+addEventListener('resize',drawDuty);
+requestAnimationFrame(drawDuty);
+const bar=document.getElementById('progress');
+document.querySelectorAll('section > *, .scheme').forEach(el=>{if(!el.classList.contains('cloud'))el.classList.add('reveal')});
+const obs=new IntersectionObserver(es=>es.forEach(e=>{if(e.isIntersecting)e.target.classList.add('in')}),{threshold:.12});
+document.querySelectorAll('.reveal').forEach(el=>obs.observe(el));
+addEventListener('scroll',()=>{
+  const max=document.documentElement.scrollHeight-innerHeight;
+  bar.style.width=(max>0?scrollY/max*100:0)+'%';
+},{passive:true});
+</script>
+</body>
+</html>
